@@ -22,12 +22,6 @@ void EtRobocon2019::start()
     BlockBingo::move, BlockBingo::spinRight, BlockBingo::move,
     BlockBingo::spinLeft, BlockBingo::spinLeft, BlockBingo::spinRight,
     BlockBingo::move, BlockBingo::spinRight, BlockBingo::spinLeft };
-  // std::function<void(Controller&)> order[orderSize]
-  //   = { BlockBingo::move, BlockBingo::spinRight, BlockBingo::move,
-  //   BlockBingo::spinLeft, BlockBingo::spinLeft, BlockBingo::spinRight,
-  //   BlockBingo::move, BlockBingo::spinRight, BlockBingo::spinLeft };
-    // = { move, spinRight, move, spinLeft, spinLeft, spinRight, move, spinRight, spinLeft };
 
-  // bingo.execOrder(order);
   bingo.execOrder(orderSize, order);
 }

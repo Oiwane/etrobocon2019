@@ -25,10 +25,6 @@ void BlockBingo::execOrder(std::size_t orderSize, std::array<std::function<void(
     func(controller);
     controller.tslpTsk(1000);
   }
-  // for(std::size_t i = 0; i < orderSize; i++) {
-  //   order[i](controller);
-  //   controller.tslpTsk(1000);
-  // }
 }
 
 void BlockBingo::move(Controller& controller_)
