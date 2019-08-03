@@ -18,3 +18,29 @@ void BlockBingo::moveCircle4OfL()
   navigator.moveToSpecifiedColor(Color::black, 10);
   navigator.spin(45.0);
 }
+
+void BlockBingo::execOrder(std::size_t orderSize, std::array<std::function<void(void)>, orderSize> order)
+{
+  for(std::function<void(void)> f : order){
+    f;
+    controller.tslpTsk(1000);
+  }
+}
+
+void BlockBingo::move()
+{
+  Navigator navigator(controller);
+  navigator.move(350, 10);
+}
+
+void BlockBingo::spinLeft()
+{
+  Navigator navigator(controller);
+  navigator.spin(90, false);
+}
+
+void BlockBingo::spinRight()
+{
+  Navigator navigator(controller);
+  navigator.spin(90);
+}
