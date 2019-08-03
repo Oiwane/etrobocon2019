@@ -31,9 +31,9 @@ void NormalCourse::setIsLeftCourse(bool isLeftCourse_)
 void NormalCourse::runNormalCourse()
 {
   // 配列の個数
-  constexpr int arraySize = 7;
+  constexpr int size = 7;
   int baseSpeed = 700;
-  std::array<NormalCourseProperty, arraySize> normalCourseProperty
+  std::array<NormalCourseProperty, size> normalCourseProperty
       /**
        * 詳しく見たいならLineTracer.hを見てね．
        * 進む距離，目標スピード，スピードpid，ターンpid

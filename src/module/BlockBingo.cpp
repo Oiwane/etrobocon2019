@@ -19,28 +19,32 @@ void BlockBingo::moveCircle4OfL()
   navigator.spin(45.0);
 }
 
-void BlockBingo::execOrder(std::size_t orderSize, std::array<std::function<void(void)>, orderSize> order)
+void BlockBingo::execOrder(std::size_t orderSize, std::array<std::function<void(Controller&)>, 9> order)
 {
-  for(std::function<void(void)> f : order){
-    f;
+  for(auto& func : order) {
+    func(controller);
     controller.tslpTsk(1000);
   }
+  // for(std::size_t i = 0; i < orderSize; i++) {
+  //   order[i](controller);
+  //   controller.tslpTsk(1000);
+  // }
 }
 
-void BlockBingo::move()
+void BlockBingo::move(Controller& controller_)
 {
-  Navigator navigator(controller);
+  Navigator navigator(controller_);
   navigator.move(350, 10);
 }
 
-void BlockBingo::spinLeft()
+void BlockBingo::spinLeft(Controller& controller_)
 {
-  Navigator navigator(controller);
+  Navigator navigator(controller_);
   navigator.spin(90, false);
 }
 
-void BlockBingo::spinRight()
+void BlockBingo::spinRight(Controller& controller_)
 {
-  Navigator navigator(controller);
+  Navigator navigator(controller_);
   navigator.spin(90);
 }

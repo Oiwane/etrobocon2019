@@ -15,24 +15,6 @@ class BlockBingo {
  private:
   Controller& controller;
 
-  /**
-   * Navigator::moveを呼び出す
-   * @brief 350mm前進する
-   */
-  void move();
-
-  /**
-   * Navigator::spinを呼び出す
-   * @brief 90度左に回頭する
-   */
-  void spinLeft();
-
-  /**
-   * Navigator::spinを呼び出す
-   * @brief 90度右に回頭する
-   */
-  void spinRight();
-
  public:
   /**
    * コンストラクタ
@@ -52,7 +34,26 @@ class BlockBingo {
    * @param orderSize [orderのサイズ]
    * @param order [命令のリスト]
    */
-  void execOrder(std::size_t orderSize, std::array<std::function<void(void)>, orderSize> order);
+  void execOrder(std::size_t orderSize, std::array<std::function<void(Controller&)>, 9> order);
+  // void execOrder(std::function<void(Controller&)> order[]);
+
+  /**
+   * Navigator::moveを呼び出す
+   * @brief 350mm前進する
+   */
+  static void move(Controller& controller_);
+
+  /**
+   * Navigator::spinを呼び出す
+   * @brief 90度左に回頭する
+   */
+  static void spinLeft(Controller& controller_);
+
+  /**
+   * Navigator::spinを呼び出す
+   * @brief 90度右に回頭する
+   */
+  static void spinRight(Controller& controller_);
 };
 
 #endif

@@ -5,6 +5,8 @@
 #include "NormalCourse.h"
 #include "Navigator.h"
 #include "BlockBingo.h"
+#include <array>
+#include <functional>
 
 void EtRobocon2019::start()
 {
@@ -15,9 +17,17 @@ void EtRobocon2019::start()
   while(!controller.touchSensor.isPressed()) {
   }
 
-  std::size_t orderSize = 9;
-  std::array<std::function<void(void)>, orderSize> order
-    = { move, spinRight, move, spinLeft, spinLeft, spinRight, move, spinRight, spinLeft };
+  const std::size_t orderSize = 9;
+  std::array<std::function<void(Controller&)>, orderSize> order{
+    BlockBingo::move, BlockBingo::spinRight, BlockBingo::move,
+    BlockBingo::spinLeft, BlockBingo::spinLeft, BlockBingo::spinRight,
+    BlockBingo::move, BlockBingo::spinRight, BlockBingo::spinLeft };
+  // std::function<void(Controller&)> order[orderSize]
+  //   = { BlockBingo::move, BlockBingo::spinRight, BlockBingo::move,
+  //   BlockBingo::spinLeft, BlockBingo::spinLeft, BlockBingo::spinRight,
+  //   BlockBingo::move, BlockBingo::spinRight, BlockBingo::spinLeft };
+    // = { move, spinRight, move, spinLeft, spinLeft, spinRight, move, spinRight, spinLeft };
 
+  // bingo.execOrder(order);
   bingo.execOrder(orderSize, order);
 }
