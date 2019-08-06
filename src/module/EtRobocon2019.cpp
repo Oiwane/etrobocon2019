@@ -17,11 +17,11 @@ void EtRobocon2019::start()
   while(!controller.touchSensor.isPressed()) {
   }
 
-  const std::size_t orderSize = 9;
-  std::array<std::function<void(Controller&)>, orderSize> order{
-    BlockBingo::move, BlockBingo::spinRight, BlockBingo::move,
-    BlockBingo::spinLeft, BlockBingo::spinLeft, BlockBingo::spinRight,
-    BlockBingo::move, BlockBingo::spinRight, BlockBingo::spinLeft };
+  constexpr int propertySize = 4;
+  std::array<OrderProperty, propertySize> propertys = { { { Order::MOVE, 0.0, Color::black },
+                                                          { Order::SPIN, 45.0, Color::black },
+                                                          { Order::SPIN, -90.0, Color::black },
+                                                          { Order::COLOR, 0.0, Color::black } } };
 
-  bingo.execOrder(orderSize, order);
+  bingo.execOrder<propertySize>(propertys);
 }

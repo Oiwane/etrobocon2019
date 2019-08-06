@@ -11,6 +11,19 @@
 #include "Controller.h"
 #include "Navigator.h"
 
+enum class Order { MOVE, SPIN, COLOR };
+
+/**
+ * execOrderで使用する構造体
+ *
+ * paramValueまたはparamColorを使用しないときは何か値を入れておく
+ */
+struct OrderProperty {
+  Order orderName;    //命令の内容
+  double paramValue;  // Navigator.spinの引数で使用する
+  Color paramColor;   // Navigator.moveToSpecifiedColorの引数で使用する
+};
+
 class BlockBingo {
  private:
   Controller& controller;
@@ -31,29 +44,26 @@ class BlockBingo {
 
   /**
    * パソコンから受け取ったリストの通りに処理を実行する
-   * @param orderSize [orderのサイズ]
-   * @param order [命令のリスト]
+   * @param propertys [命令の情報のリスト]
    */
-  void execOrder(std::size_t orderSize, std::array<std::function<void(Controller&)>, 9> order);
-  // void execOrder(std::function<void(Controller&)> order[]);
+  template <int N>
+  void execOrder(std::array<OrderProperty, N>& propertys)
+  {
+    Navigator navigator(controller);
 
-  /**
-   * Navigator::moveを呼び出す
-   * @brief 350mm前進する
-   */
-  static void move(Controller& controller_);
-
-  /**
-   * Navigator::spinを呼び出す
-   * @brief 90度左に回頭する
-   */
-  static void spinLeft(Controller& controller_);
-
-  /**
-   * Navigator::spinを呼び出す
-   * @brief 90度右に回頭する
-   */
-  static void spinRight(Controller& controller_);
+    for(OrderProperty property : propertys) {
+      if(property.orderName == Order::MOVE) {
+        navigator.move(350.0, 10);
+      } else if(property.orderName == Order::COLOR) {
+        navigator.moveToSpecifiedColor(property.paramColor, 10);
+      } else if(property.orderName == Order::SPIN) {
+        navigator.spin(property.paramValue, (property.paramValue > 0));
+      } else {
+        controller.stopMotor();
+        controller.speakerPlayToneFS6(100);
+      }
+    }
+  }
 };
 
 #endif
