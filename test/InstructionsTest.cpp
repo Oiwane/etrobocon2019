@@ -38,5 +38,7 @@ namespace etrobocon2019_test {
 
     ASSERT_EQ(Order::QUICK_PUT_R, instructions.translate('y'));
     ASSERT_EQ(Order::QUICK_PUT_L, instructions.translate('z'));
+
+    ASSERT_EQ(Order::QUIT, instructions.translate('#'));
   }
 }  // namespace etrobocon2019_test
